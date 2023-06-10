@@ -1,0 +1,142 @@
+<!doctype html>
+{%load static%}
+<html lang="en">
+  <head>
+  	<title>Sidebar 02</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="{%static 'css/style.css'%}">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <style>
+<style>
+
+        /* Styling the Body element i.e. Color,
+        Font, Alignment */
+        body {
+            background-color: #05c46b;
+            font-family: Verdana;
+            text-align: center;
+        }
+
+        /* Styling the Form (Color, Padding, Shadow) */
+        form {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px 20px;
+            box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Styling form-control Class */
+        .form-control {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        /* Styling form-control Label */
+        .form-control label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Styling form-control input,
+        select, textarea */
+        .form-control input,
+        .form-control select,
+        .form-control textarea {
+
+            border-radius: 2px;
+            font-family: inherit;
+            padding: 2px;
+            display: block;
+            width: 95%;
+        }
+
+        /* Styling form-control Radio
+        button and Checkbox */
+        .form-control input[type="radio"],
+        .form-control input[type="checkbox"] {
+            display: inline-block;
+            width: auto;
+        }
+
+        /* Styling Button */
+        button {
+            background-color: #05c46b;
+            border: 1px solid #777;
+            border-radius: 2px;
+            font-family: inherit;
+            font-size: 21px;
+            display: block;
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+  <body>
+
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+
+				<div class="p-4 pt-5">
+		  		<h1><a href="#" class="logo">Splash</a></h1>
+	        <ul class="list-unstyled components mb-5">
+	          <li>
+	               <a href="{% url 'createUserView'%}">Add User</a>
+	          </li>
+	          <li>
+                   <a href="{% url 'viewUser'%}">View User</a>
+	          </li>
+	        </ul>
+                    {% if user.is_authenticated and 'user_id' in request.session %}
+                    <div class="mb-5">
+                     <div class="form-group d-flex">
+	            	<div class="icon"><span class="icon-paper-plane"></span></div>
+                    <button type="button" class="btn btn-default btn-sm">
+                    <a class="glyphicon glyphicon-log-out" href="{% url 'adminLogout'%}">{{ request.session.user_id}} Log Out</a>
+                    </button>
+                     </div>
+	                </div>
+                    {%endif%}
+
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+		  <h2 class="mb-4">Add User</h2>
+		  <!-- start my code -->
+          <form action="/createUser" method="post">
+              {% csrf_token %}
+        <div class="form-control">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" name="firstname" placeholder="Your first name..">
+        </div>
+        <div class="form-control">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" name="lastname" placeholder="Your last name..">
+        </div>
+        <div class="form-control">
+            <label for="email" >Email</label>
+            <input type="text" id="email" name="email" placeholder="Your email..">
+        </div>
+        <div class="form-control">
+            <label for="contact" >Contact</label>
+            <input type="text" id="contact" name="contact" placeholder="Your contact..">
+        </div>
+         <div class="form-control">
+            <label for="birthday" >Birthday</label>
+            <input type="date" id="birthday" name="birthday" placeholder="Your Birthdate.">
+        </div>
+ <!-- Multi-line Text Input Control -->
+        <button type="submit" value="submit">
+            Submit
+        </button>
+    </form>
+		  <!-- end code  -->
+        </div>
+		</div>
+  </body>
+</html>

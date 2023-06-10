@@ -1,0 +1,101 @@
+<!doctype html>
+{%load static%}
+<html lang="en">
+  <head>
+  	<title>Sidebar 02</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="{%static 'css/style.css'%}">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.4.1/css/dataTables.dateTime.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+
+
+
+      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+      <script src="https://cdn.datatables.net/datetime/1.4.1/js/dataTables.dateTime.min.js"></script>
+      <script src="{%static 'js/dataTables.editor.min.js'%}"></script>
+
+<script>
+$(document).ready(function () {
+    $('#example').DataTable();
+});
+</script>
+
+</head>
+  <body>
+
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+
+				<div class="p-4 pt-5">
+		  		<h1><a href="#" class="logo">Splash</a></h1>
+	        <ul class="list-unstyled components mb-5">
+	          <li>
+	               <a href="{% url 'createUserView'%}">Add User</a>
+	          </li>
+	          <li>
+              <a href="#">View User</a>
+	          </li>
+	        </ul>
+                    {% if user.is_authenticated and 'user_id' in request.session %}
+                    <div class="mb-5">
+                     <div class="form-group d-flex">
+	            	<div class="icon"><span class="icon-paper-plane"></span></div>
+                    <button type="button" class="btn btn-default btn-sm">
+                    <a class="glyphicon glyphicon-log-out" href="{% url 'adminLogout'%}">{{ request.session.user_id}} Log Out</a>
+                    </button>
+                     </div>
+	                </div>
+                    {%endif%}
+
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5 pt-5">
+		  <h2 class="mb-4">Add User</h2>
+		  <!-- start my code -->
+           <table id="example" class="table table-striped" style="width:100%">
+  <thead>
+    <tr>
+      <th scope="col">User Name</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+        <th scope="col">Last Login </th>
+        <th scope="col">Joined Date </th>
+        <th scope="col"> </th>
+    </tr>
+  </thead>
+  <tbody>
+     {% for x in mymembers %}
+    <tr>
+      <td>{{ x.username }}</td>
+      <td>{{ x.first_name }}</td>
+      <td>{{ x.last_name }}</td>
+        <td>{{ x.email }}</td>
+        <td>{{ x.last_login}}</td>
+        <td>{{ x.date_joined}}</td>
+        <td>
+
+				<button type="button" class="btn btn-primary">Edit</button>
+
+        </td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+		  <!-- end code  -->
+        </div>
+		</div>
+  </body>
+</html>

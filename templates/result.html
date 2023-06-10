@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+result........
+{% if user.is_authenticated and 'user_id' in request.session %}
+<a href="{% url 'adminLogout'%}">{{ request.session.user_id}}LogOuttttt</a>
+{%else%}
+<a href="{% url 'viewAdminLogin'%}">click on for Member Log in</a>
+{%endif%}
+
+{%if user.is_authenticated and user.is_admin%}
+<a href="">you can create</a>
+{%endif%}
+</body>
+</html>
